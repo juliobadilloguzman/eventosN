@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Meta -->
+	<meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+	<meta name="author" content="ThemePixels">
+
+	<title>Slim Responsive Bootstrap 4 Admin Template</title>
+
+	<!-- vendor css -->
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<link href="css/Ionicons/css/ionicons.css" rel="stylesheet">
+	<link href="css/rickshaw.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+	<!-- Slim CSS -->
+	<link rel="stylesheet" href="css/slim.css">
+
+</head>
+
+<body>
+	<div class="slim-header">
+		<div class="container">
+			<div class="slim-header-left">
+				<h2 class="slim-logo"><a href="index.html">Eventos Morelos<span></span></a></h2>
+
+				
+			</div><!-- slim-header-left -->
+			<div class="slim-header-right">
+
+				<div class="dropdown dropdown-c">
+					<a href="#" class="logged-user" data-toggle="dropdown">
+				
+						<span>{{usuario.nombre}}</span>
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<nav class="nav">
+
+							<a href="/logout" class="nav-link"><i class="icon ion-forward"></i>Cerrar
+								Sesión</a>
+						</nav>
+					</div><!-- dropdown-menu -->
+				</div><!-- dropdown -->
+			</div><!-- header-right -->
+		</div><!-- container -->
+	</div><!-- slim-header -->
+
+	<div class="slim-navbar">
+		<div class="container">
+			<ul class="nav">
+
+
+
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboardU">
+						<i class="icon ion-ios-chatboxes-outline"></i>
+						<span>Usuarios</span>
+
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboardE">
+						<i class="icon ion-ios-analytics-outline"></i>
+						<span>Eventos</span>
+					</a>
+				</li>
+			</ul>
+		</div><!-- container -->
+	</div><!-- slim-navbar -->
+
+	<div class="slim-mainpanel">
+		<div class="container">
+			<div class="slim-pageheader">
+				<ol class="breadcrumb slim-breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Inicio</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+				</ol>
+				<h6 class="slim-pagetitle">Eventos</h6>
+			</div><!-- slim-pageheader -->
+
+			{{!-- PANTALLA 1: DISPLAY USUARIO --}}
+			<div class="row" id="pantalla-displayUsuarios">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+
+							{{> messages}}
+							{{> errors}}
+
+							<a href="/agregarUsuario" class="btn btn-primary mb-3" id="btn-agregarUsuario">Agregar
+								Usuario</a>
+
+							<div class="table-responsive">
+								<table class="table table-striped mg-b-0">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Usuario</th>
+											<th>Status</th>
+											<th>Rol</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{{#each usuarios}}
+										<tr>
+											<th>{{this.nombre}}</th>
+											<td>{{this.usuario}}</td>
+											<td>{{this.usuarioActivo}}</td>
+											<td>{{this.rol}}</td>
+											<td><button class="btn btn-success btn-editarUsuario" data-toggle="modal"
+													data-target="#modalEditar" value="{{id}}">Editar</button>
+												<button class="btn btn-danger btn-eliminarUsuario"
+													value="{{id}}">Eliminar</button></td>
+
+										</tr>
+										{{/each}}
+
+										<input type="hidden" id="idUsuario">
+
+									</tbody>
+								</table>
+							</div><!-- bd -->
+						</div><!-- section-wrapper -->
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div><!-- row -->
+
+	<!-- BASIC MODAL -->
+	<div id="modalEditar" class="modal fade">
+		<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
+			<div class="modal-content bd-0 tx-14">
+				<div class="modal-header">
+					<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Message Preview</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+			
+
+					<h4>Editar usuario</h4>
+					<p>________________________________________________________________</p>
+					{{!-- Nombre --}}
+					<label for="nombre">Nombre</label>
+					<input type="text" class="form-control mb-2" id="editar-nombre" name="nombre"
+						placeholder="Ingresa Nombre">
+
+					{{!-- Nombre de usuario --}}
+					<label for="nombre">Nombre de usuario</label>
+					<input type="text" class="form-control mb-2" id="editar-usuario" name="usuario"
+						placeholder="Ingresa Nombre de Usuario">
+
+					{{!-- Contraseña --}}
+					<label>Contraseña</label>
+					<input type="password" class="form-control mb-2" id="editar-password" name="password"
+						placeholder="Ingresa Contraseña">
+
+					{{!-- Estatus --}}
+					<label>Estatus</label>
+					<select class="form-control mb-2" name="usuarioActivo" id="editar-usuarioActivo">
+						<option disabled selected>Seleccione estatus</option>
+						<option value="Y">Si</option>
+						<option value="N">No</option>
+					</select>
+
+					<input type="hidden" name="accesoIntentos" value="0" id="editar-accesoIntentos">
+
+					<div class="form-group row">
+						<div class="col-12">
+							<label>Rol</label>
+							<select class="form-control mb-2" name="rol" id="editar-rol">
+								<option disabled selected>Seleccione estatus</option>
+								<option value="A">Administrador</option>
+								<option value="U">Usuario</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn-Patch">Guardar Cambios</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->
+
+
+
+	</div><!-- container -->
+	</div><!-- slim-mainpanel -->
+
+	<div class="slim-footer">
+		<div class="container">
+			<p>Copyright 2018 &copy; All Rights Reserved. Eventos Morelos</p>
+		
+		</div><!-- container -->
+	</div><!-- slim-footer -->
+
+	<script src="js/jquery.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<script src="js/ResizeSensor.js"></script>
+	{{!-- <script src="js/dashboard.js"></script> --}}
+	<script src="js/slim.js"></script>
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Registro</title>
+
+
+    <link rel="stylesheet" href="css/slim.css">
+    <link rel="stylesheet" href="css/signup.css">
+
+
+
+
+</head>
+
+<body>
+
+    <div class="d-md-flex flex-row-reverse bg">
+        <div class="signin-right">
+
+            <div class="signin-box">
+
+                {{> messages}}
+                {{> errors}}
+                
+                <h2 class="signin-title-primary">¡Registrate!</h2>
+                <h5 class="signin-title-secondary">Ingresa a la mayor comunidad de eventos en Morelos</h5>
+
+                <form action="/signup " method="POST">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="">Nombre (obligatorio)</label>
+                            <input type="text" value="{{nombre}}" class="form-control" name="nombre" placeholder="Ingresa nombre">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="">Nombre de usuario (obligatorio)</label>
+                            <input type="text" value="{{nombreUsuario}}" class="form-control" name="nombreUsuario"
+                                placeholder="Ingresa nombre de usuario">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="">Contraseña (obligatorio)</label>
+                            <input type="text" value="{{password}}" class="form-control" name="password" placeholder="Ingresa contraseña">
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary btn-block btn-signin">Registrarse</button>
+                </form>
+
+                {{!-- {{#each errors}}
+                    <div class="alert alert-danger p-2" role="alert">
+                        {{mensaje}}
+                    </div>
+                {{/each}} --}}
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/mdb.min.js"></script>
+
+    <script src="js/jquery.countdown.min.js"></script>
+
+    <script src="js/slim.js"></script>
+
+</body>
+
+</html>
