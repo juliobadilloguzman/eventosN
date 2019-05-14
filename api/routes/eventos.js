@@ -18,7 +18,7 @@ router.get('/eventos/:id', (req, res) => {
     });
 
 });
-
+//INSERT
 router.post('/eventos', (req, res) => {
 
     let file = req.files.imagen;
