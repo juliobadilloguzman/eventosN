@@ -9,7 +9,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
-var $ = require("jquery");
+
 
 const IndexRoutes = require('./api/routes/index');
 const UsersRoutes = require('./api/routes/usuarios');
@@ -35,13 +35,13 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use((req, res, next) => {
 
-    // Dominio que tengan acceso (ej. 'http://example.com')
+
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Metodos de solicitud que deseas permitir
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
-    // Encabecedados que permites (ej. 'X-Requested-With,content-type')
+
     res.setHeader('Access-Control-Allow-Headers', '*');
 
     next();
