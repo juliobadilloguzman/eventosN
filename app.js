@@ -62,8 +62,11 @@ app.use(fileUpload());
 app.use((req, res, next) => {
 
     res.locals.success_msg = req.flash('success_msg');
+
     res.locals.error_msg = req.flash('error_msg');
+
     res.locals.error = req.flash('error');
+    
     res.locals.usuario = req.user || null;
 
     next();
@@ -73,12 +76,8 @@ app.use((req, res, next) => {
 
 ///////////////ROUTES
 app.use('/', IndexRoutes);
-
 app.use('/', UsersRoutes);
-
-
 app.use('/', AdminRoutes);
-
 app.use('/', EventosRoutes);
 
 

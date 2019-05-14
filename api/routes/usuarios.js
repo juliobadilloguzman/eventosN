@@ -14,7 +14,7 @@ router.post('/login', passport.authenticate('local-general', {
 }));
 
 router.get('/signup', (req, res) => {
-    
+
     res.render('users/signup');
 });
 
@@ -89,7 +89,6 @@ router.post('/usuarios/agregarUsuario', (req, res) => {
     let usuario = req.body;
 
     let query = 'INSERT INTO usuarios SET ?';
-
     connection.query(query, [usuario], (error, rows, field) => {
 
         if (!error) {
@@ -100,6 +99,7 @@ router.post('/usuarios/agregarUsuario', (req, res) => {
                 error: error
             });
         }
+    
 
     });
 
