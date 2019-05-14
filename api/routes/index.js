@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../database');
 
-
+//SELECT
 router.get('/', (req, res) => {
 
     let query = 'SELECT * FROM categoria; SELECT * from eventos';
@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
 
     connection.query(query, (error, rows, field) => {
 
-
-
         if (!error) {
+
+
             res.render('index.hbs', { categorias: rows[0], eventos: rows[1] });
         } else {
             console.log(error);
