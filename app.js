@@ -71,10 +71,14 @@ app.use((req, res, next) => {
 });
 
 
-///////////////**********Routes
+///////////////ROUTES
 app.use('/', IndexRoutes);
+
 app.use('/', UsersRoutes);
+
+
 app.use('/', AdminRoutes);
+
 app.use('/', EventosRoutes);
 
 
