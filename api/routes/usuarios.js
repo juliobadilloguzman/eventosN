@@ -123,6 +123,48 @@ router.post('/signup', (req, res, next) => {
     }
 
     console.log(data);
+
+
+    if (nombre.length <= 0) {
+        errors.push({ mensaje: 'El nombre no puede estar vacio' });
+    }
+
+    if (password.length <= 0) {
+        errors.push({ mensaje: 'La contraseña no puede estar vacia' });
+    }
+
+    if (password.length < 5) {
+        errors.push({ mensaje: 'La contraseña debe ser mayor a 4 digitos' });
+    }
+
+    let queryVerify = "SELECT * from usuarios WHERE usuario = ?";
+
+    connection.query(queryVerify, [nombreUsuario], (error, rows, field) => {
+
+        if (rows.length > 0) {
+            errors.push({ mensaje: 'El nombre de usuario ya esta en uso' });
+        }
+
+        //si hay errores
+        if (errors.length > 0) {
+            res.render('users/signup', { errors, nombre, nombreUsuario, password });
+        } else {
+
+            let query = 'INSERT INTO usuarios SET ?';
+
+            connection.query(query, [data], (error, rows, field) => {
+                if (!error) {
+                    req.flash('success_msg', 'Cuenta creada satisfactoriamente');
+                    res.redirect('/login');
+                }
+            });
+
+        }
+
+
+
+    });
+
 });
 
 module.exports = router;
