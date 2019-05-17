@@ -1,3 +1,4 @@
+//Librerias
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -10,7 +11,9 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
 
+const handlebars = require('handlebars');
 
+//Rutas
 const IndexRoutes = require('./api/routes/index');
 const UsersRoutes = require('./api/routes/usuarios');
 const AdminRoutes = require('./api/routes/admin');
@@ -35,13 +38,13 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use((req, res, next) => {
 
-
+    // Dominio que tengan acceso (ej. 'http://example.com')
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Metodos de solicitud que deseas permitir
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
-
+    // Encabecedados que permites (ej. 'X-Requested-With,content-type')
     res.setHeader('Access-Control-Allow-Headers', '*');
 
     next();
@@ -69,6 +72,14 @@ app.use((req, res, next) => {
     next();
 
 });
+
+handlebars.registerHelper('if_equal', function(a, b, opts) {
+    if (a == b) {
+        return opts.fn(this)
+    } else {
+        return opts.inverse(this)
+    }
+})
 
 
 ///////////////**********Routes

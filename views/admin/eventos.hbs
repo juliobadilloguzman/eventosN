@@ -31,7 +31,7 @@
 	<div class="slim-header">
 		<div class="container">
 			<div class="slim-header-left">
-				<h2 class="slim-logo"><a href="index.html">Eventos Morelos<span></span></a></h2>
+				<h2 class="slim-logo"><a href="/">Eventos Morelos<span></span></a></h2>
 
 
 			</div><!-- slim-header-left -->
@@ -40,7 +40,7 @@
 				<div class="dropdown dropdown-c">
 					<a href="#" class="logged-user" data-toggle="dropdown">
 
-						<span>Katherine</span>
+						<span>{{usuario.nombre}}</span>
 						<i class="fa fa-angle-down"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
@@ -98,22 +98,25 @@
 							<a href="/agregarEvento" class="btn btn-primary mb-3" id="btn-agregarUsuario">Agregar
 								Evento</a>
 
-							<div class="card-group">
+							<div class="card-group row" style="width:100% !important">
 								{{#each eventos}}
-								<div class="card m-2">
-									<img src="http://localhost:3000/images/upload_images/{{this.imagen}}" width="280"
-										height="180" class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5 class="card-title">{{this.titulo}}</h5>
-										<p class="card-text">{{this.descripcion}}</p>
-										<button class="btn-editarEvento btn btn-success" value="{{this.id}}"
-											data-toggle="modal" data-target="#modalEditar">Editar</button>
-										<button class="btn-eliminarEvento btn btn-danger"
-											value="{{this.id}}">Eliminar</button>
+								<div class="col-4 mt-3">
+									
+									<div class="card m-2">
+										<img src="http://localhost:3000/images/upload_images/{{this.imagen}}"
+											width="280" height="180" class="card-img-top" alt="...">
+										<div class="card-body">
+											<h5 class="card-title">{{this.titulo}}</h5>
+											<p class="card-text">{{this.descripcion}}</p>
+											<button class="btn-editarEvento btn btn-success" value="{{this.id}}"
+												data-toggle="modal" data-target="#modalEditar">Editar</button>
+											<button class="btn-eliminarEvento btn btn-danger"
+												value="{{this.id}}">Eliminar</button>
+										</div>
 									</div>
+									
 								</div>
 								{{/each}}
-
 								<input type="hidden" id="idEvento">
 							</div>
 

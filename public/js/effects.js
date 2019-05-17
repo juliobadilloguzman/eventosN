@@ -1,46 +1,13 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
+    console.log(document.getElementById('fechaRealizacionMost').value);
+    console.log('DATE:' + new Date(document.getElementById('fechaRealizacionMost').value).getTime());
 
-
-    $('#input-buscar').css("display", "none");
-    $('#btn-buscarGo').css("display", "none");
-    $('#signUpLanding').hide();
-    
-
-    //Boton buscar
-    $('#btn-buscar').on('click', function(){
-
-        $('#btn-buscar').slideUp();
-
-        if($('#input-buscar').css('display') == 'none'){
-
-            $('#input-buscar').slideDown();
-            $('#btn-buscarGo').slideDown();
-        }
-        
-
-    });
-
-    //Boton login y registro
-    $('#btn-registro2').on('click', function(){
-
-
-        $('#loginLanding').hide();
-        $('#signUpLanding').show();
-        
-
-    });
-
-
-    $('#btn-login2').on('click', function(){
-
-        $('#loginLanding').show();
-        $('#signUpLanding').hide();        
-
-    });
-    
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+    var countDownDate = new Date(document.getElementById('fechaRealizacionMost').value).getTime();
+
+    console.log(countDownDate);
+
 
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -58,13 +25,13 @@ $(document).ready(function(){
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+            minutes + "m " + seconds + "s ";
 
         // If the count down is finished, write some text 
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
+            document.getElementById("demo").innerHTML = "Este evento ya se celebro";
         }
     }, 0);
 

@@ -37,7 +37,6 @@
      }));
 
  passport.use('local-admin', new LocalStrategy({
-
          usernameField: 'username',
          passwordField: 'password',
          passReqToCallback: true // allows us to pass back the entire request to the callback
@@ -59,28 +58,7 @@
 
      }));
 
- passport.use('local-signup', new LocalStrategy({
 
-         usernameField: 'username',
-         passwordField: 'password',
-         passReqToCallback: true // allows us to pass back the entire request to the callback
-     },
-     function(req, username, password, done) {
-
-
-
-         connection.query(`SELECT * FROM usuarios`, function(err, rows) {
-             if (err)
-                 return done(err);
-             if (rows.length) {
-                 return done(null, false, req.flash('error_msg', 'El nombre de usuario ya existe'));
-             }
-             // all is well, return successful user
-             return done(null, rows[0]);
-
-         });
-
-     }));
 
  // used to serialize the user for the session
  passport.serializeUser(function(user, done) {

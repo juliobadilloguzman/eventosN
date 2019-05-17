@@ -2,29 +2,25 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../database');
 
-//SELECT
+
 router.get('/', (req, res) => {
 
-    let query = 'SELECT * FROM categoria; SELECT * from eventos';
+    let query = 'SELECT * FROM categoria; SELECT * from eventos; SELECT * from eventos ORDER BY fechaRealizacion DESC limit 1;';
+
 
 
     connection.query(query, (error, rows, field) => {
 
+        console.log('ROWS1:' + rows[0]);
+        console.log('ROWS:' + rows[2]);
+
         if (!error) {
-
-
-            res.render('index.hbs', { categorias: rows[0], eventos: rows[1] });
+            res.render('index.hbs', { categorias: rows[0], eventos: rows[1], mostRecent: rows[2] });
         } else {
             console.log(error);
         }
 
-
-
     });
-
-
-
-
 
 });
 

@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
     var botonEditarEvento = document.getElementsByClassName('btn-editarEvento');
+    var botonEliminarEvento = document.getElementsByClassName('btn-eliminarEvento');
+
+
     console.log(botonEditarEvento);
+    console.log(botonEliminarEvento);
 
     //EditarGETDATA
     for (var i = 0; i < botonEditarEvento.length; i++) {
@@ -11,7 +15,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             console.log(this.value);
             document.getElementById('idEvento').value = this.value;
 
-            fetch('/eventos/' + this.value)
+            fetch('/eventos/' + this.value, {
+                    method: 'POST',
+                })
                 .then(function(response) {
                     return response.json();
                 })
@@ -28,42 +34,87 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     }
 
-});
-
-//Editar
-document.getElementById('btn-Patch').addEventListener('click', function() {
+    //Editar
+    document.getElementById('btn-Patch').addEventListener('click', function() {
 
 
-    var data = {
-        titulo: document.getElementById('editar-titulo').value,
-        descripcion: document.getElementById('editar-descripcion').value,
-        fechaRealizacion: document.getElementById('editar-fechaRealizacion').value,
-        //imagen: document.getElementById('imagen').files.item(0).name,
-        lugar: document.getElementById('editar-lugar').value
-    }
+        var data = {
+            titulo: document.getElementById('editar-titulo').value,
+            descripcion: document.getElementById('editar-descripcion').value,
+            fechaRealizacion: document.getElementById('editar-fechaRealizacion').value,
+            //imagen: document.getElementById('imagen').files.item(0).name,
+            lugar: document.getElementById('editar-lugar').value
+        }
 
 
-    fetch("eventos/" + document.getElementById('idEvento').value, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'PATCH',
-        body: JSON.stringify(data)
-    }).then((response) => {
-        console.log(response);
+        fetch("eventos/" + document.getElementById('idEvento').value, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        }).then((response) => {
+            console.log(response);
 
-        swal("Evento editado correctamente", {
-                icon: "success"
-            })
-            .then((value) => {
-                window.location.replace("/dashboardE");
-            });
+            swal("Evento editado correctamente", {
+                    icon: "success"
+                })
+                .then((value) => {
+                    window.location.replace("/dashboardE");
+                });
 
-    }).catch(err => {
-        console.error(err)
+        }).catch(err => {
+            console.error(err)
+        });
+
+
+
     });
 
+    //Eliminar
+    for (var i = 0; i < botonEliminarEvento.length; i++) {
+        botonEliminarEvento[i].addEventListener('click', function() {
+
+            swal({
+                    title: "Estas seguro?",
+                    text: "Una vez el eliminado el evento ya no se podra recuperar",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        console.log(this.value);
+                        document.getElementById('idEvento').value = this.value;
+
+                        fetch("eventos/" + document.getElementById('idEvento').value, {
+                            method: 'DELETE'
+                        }).then(() => {
+                            console.log('removed');
+                        }).catch(err => {
+                            console.error(err)
+                        });
+
+                        swal("Evento eliminado correctamente", {
+                                icon: "success"
+                            })
+                            .then((value) => {
+                                window.location.replace("/dashboardE");
+                            });
+
+
+
+
+                    }
+                });
+
+
+
+
+        });
+    }
 
 
 });

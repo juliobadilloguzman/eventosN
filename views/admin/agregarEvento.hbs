@@ -31,7 +31,7 @@
     <div class="slim-header">
         <div class="container">
             <div class="slim-header-left">
-                <h2 class="slim-logo"><a href="index.html">Eventos Morelos<span>.</span></a></h2>
+                <h2 class="slim-logo"><a href="/">Eventos Morelos<span>.</span></a></h2>
 
                 
             </div><!-- slim-header-left -->
@@ -86,11 +86,10 @@
                     <li class="breadcrumb-item">Evento</li>
                     <li class="breadcrumb-item active" aria-current="page">Agregar Evento</li>
                 </ol>
-                <h6 class="slim-pagetitle">Agregar Usuario</h6>
+                <h6 class="slim-pagetitle">Agregar Evento</h6>
             </div><!-- slim-pageheader -->
 
-            {{!-- PANTALLA 2: AGREGAR USUARIO --}}
-            <div class="row" id="pantalla-agregarUsuario">
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -141,6 +140,18 @@
                                             {{/each}}
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <label>Categoria</label>
+                                        <select class="form-control" name="categoria">
+                                            <option disabled selected>Seleccione categoria</option>
+                                            {{#each categorias}}
+                                                <option value="{{this.id}}">{{this.nombre}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
                                 </div> 
 
                                 <div class="row justify-content-center mb-4">
@@ -187,7 +198,7 @@
     <script src="js/ResizeSensor.js"></script>
     {{!-- <script src="js/dashboard.js"></script> --}}
     <script src="js/slim.js"></script>
-    <script src="js/app.js"></script>
+    {{!-- <script src="js/app.js"></script> --}}
 
 </body>
 

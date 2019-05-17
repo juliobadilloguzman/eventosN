@@ -8,7 +8,7 @@ router.get('/controlpanel', isAdminAuthenticated, (req, res) => {
     res.render('admin/prueba');
 });
 
-router.get('/dashboardU', (req, res) => {
+router.get('/dashboardU', isAdminAuthenticated, (req, res) => {
 
     let query = 'SELECT * from usuarios';
 
@@ -23,7 +23,7 @@ router.get('/dashboardU', (req, res) => {
 
 });
 
-router.get('/dashboardE', (req, res) => {
+router.get('/dashboardE', isAdminAuthenticated, (req, res) => {
 
     let query = 'SELECT * from eventos; Select * from lugar';
 
@@ -40,19 +40,22 @@ router.get('/dashboardE', (req, res) => {
 
 });
 
-router.get('/agregarUsuario', (req, res) => {
+router.get('/agregarUsuario', isAdminAuthenticated, (req, res) => {
     res.render('admin/agregarUsuario');
 });
 
-router.get('/agregarEvento', (req, res) => {
+router.get('/agregarEvento', isAdminAuthenticated, (req, res) => {
 
-    let query = 'SELECT * from lugar';
+    let query = 'SELECT * from lugar; SELECT * from categoria';
 
     connection.query(query, (error, rows, field) => {
 
         if (!error) {
+
+
+
             console.log(rows);
-            res.render('admin/agregarEvento', { lugares: rows });
+            res.render('admin/agregarEvento', { lugares: rows[0], categorias: rows[1] });
         } else {
             console.log(error);
         }
@@ -62,8 +65,5 @@ router.get('/agregarEvento', (req, res) => {
 
 });
 
-router.get('/editarUsuario/:id', (req, res) => {
-    res.render('admin/editarUsuario');
-});
 
 module.exports = router;
